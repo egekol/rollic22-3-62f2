@@ -7,6 +7,7 @@ namespace Core.Scripts.Gameplay.Levels
     {
         public string LevelName;
         public int LevelIndex;
+        public int MoveCount;
         public LevelDifficultyType Difficulty;
         public Vector2Int GridSize;
         public LevelTileData[] Tiles;

@@ -6,10 +6,15 @@ using UnityEngine;
 
 namespace Core.Scripts.Gameplay.Levels
 {
-    public class LevelExporter : Singleton<LevelExporter>
+    public interface ILevelProvider
+    {
+        IReadOnlyList<LevelDataSo> LevelDataList { get; }
+    }
+
+    public class LevelExporter : Singleton<LevelExporter>, ILevelProvider
     {
         [SerializeField] private List<LevelDataSo> _levelDataList;
-        public List<LevelDataSo> LevelDataList => _levelDataList;
+        public IReadOnlyList<LevelDataSo> LevelDataList => _levelDataList;
         public const string LevelsCsvFolderPath = "Assets/Core/LevelCsv";
         public const string LevelsSoFolderPath = "Assets/Core/ScriptableObjects/LevelDataList";
         public const string LevelsDataName = "LevelData_{0}";
@@ -109,6 +114,24 @@ namespace Core.Scripts.Gameplay.Levels
             }
 
             return Directory.GetFiles(LevelsCsvFolderPath, "*.csv");
+        }
+
+        public LevelDataSo GetLevelData(int levelIndex)
+        {
+            foreach (var levelData in _levelDataList)
+            {
+                if (levelData.LevelIndex == levelIndex)
+                {
+                    return levelData;
+                }
+            }
+
+            if (levelIndex < _levelDataList.Count)
+            {
+                return _levelDataList[levelIndex];
+            }
+            
+            return null;
         }
     }
 }
