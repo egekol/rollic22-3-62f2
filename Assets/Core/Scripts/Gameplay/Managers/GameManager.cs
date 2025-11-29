@@ -10,6 +10,8 @@ namespace Core.Scripts.Gameplay.Managers
         [SerializeField] private SceneSettingsSo _sceneSettings;
         private SceneController _sceneController;
 
+
+        
         private void Awake()
         {
             _sceneController = new SceneController();

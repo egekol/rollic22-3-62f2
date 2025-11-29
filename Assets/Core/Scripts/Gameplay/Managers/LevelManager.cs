@@ -9,6 +9,7 @@ namespace Core.Scripts.Gameplay.Managers
         private ILevelProvider _levelProvider;
 
         public LevelModel LevelModel { get; private set; }
+        public int CurrentLevel { get; set; }
 
         public void LoadLevel(int levelIndex)
         {

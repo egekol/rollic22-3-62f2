@@ -8,7 +8,6 @@ namespace Core.Scripts.Gameplay.Managers
         private LevelManager _levelManager;
         private LevelExporter _levelProvider;
         
-
         private void Awake()
         {
             SetInstances();
@@ -29,6 +28,13 @@ namespace Core.Scripts.Gameplay.Managers
         public void InitializeGameBindings()
         {
             MovementManager.Instance.Initialize(LevelManager.Instance.LevelModel, LevelGenerator.Instance);
+
+            OnGameSceneInitialized();
+        }
+
+        private void OnGameSceneInitialized()
+        {
+            
         }
     }
 }

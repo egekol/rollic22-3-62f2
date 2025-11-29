@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1188192387077062554}
   - component: {fileID: 7854541206534260280}
+  - component: {fileID: 3351495118125572344}
   - component: {fileID: 4888278667149062531}
   - component: {fileID: 296199366276025404}
   m_Layer: 5
@@ -62,6 +63,20 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 100
   m_TargetDisplay: 0
+--- !u!114 &3351495118125572344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443302988626002944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8476d9871b744acfaeb6503f0aec5011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvas: {fileID: 7854541206534260280}
+  _particleImage: {fileID: 392201382145508546}
 --- !u!114 &4888278667149062531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,6 +117,71 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &2325037378317108756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6543116602296794102}
+  - component: {fileID: 184911437786690009}
+  - component: {fileID: 2366694927279844441}
+  m_Layer: 0
+  m_Name: Trails
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6543116602296794102
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2325037378317108756}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 213260844515030309}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &184911437786690009
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2325037378317108756}
+  m_CullTransparentMesh: 1
+--- !u!114 &2366694927279844441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2325037378317108756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cdcbea113a9c4099991e8fe2c9706b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7389981795389902107
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +211,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6543116602296794102}
   m_Father: {fileID: 3942109336032583816}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -178,7 +259,7 @@ MonoBehaviour:
   _spread: 0
   _spreadLoop: 1
   _startDelay: 0
-  _radius: 400
+  _radius: 300
   _width: 100
   _height: 100
   _angle: 45
@@ -1281,13 +1362,13 @@ MonoBehaviour:
     to: 1
   _textureSheetFPS: 25
   _textureSheetCycles: 1
-  _rate: 2
+  _rate: 4
   _rateOverLifetime: 0
   _rateOverDistance: 0
   _bursts: []
-  _particleTrailRenderer: {fileID: 0}
+  _particleTrailRenderer: {fileID: 2366694927279844441}
   _trailModule:
-    enabled: 0
+    enabled: 1
   _trailWidth:
     m_Mode: 1
     m_CurveMultiplier: 1
@@ -1302,7 +1383,7 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.22169876
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1455,8 +1536,8 @@ MonoBehaviour:
     m_ColorMax: {r: 1, g: 1, b: 1, a: 1}
   _trailMaterial: {fileID: 0}
   _inheritParticleColor: 0
-  _dieWithParticle: 0
-  _trailRatio: 1
+  _dieWithParticle: 1
+  _trailRatio: 0
   _noiseOffset: {x: 0, y: 0}
   _noiseFrequency: 1
   _noiseStrength: 1
