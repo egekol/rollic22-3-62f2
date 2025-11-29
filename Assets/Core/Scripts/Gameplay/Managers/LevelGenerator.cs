@@ -89,7 +89,7 @@ namespace Core.Scripts.Gameplay.Managers
         private Vector3 CalculateWorldPosition(Vector2Int coordinates, Vector2 gridCenter)
         {
             float x = (coordinates.x - gridCenter.x) * _sizeOfTile;
-            float z = (gridCenter.y - coordinates.y) * _sizeOfTile; // Y koordinatı ters çevrildi (CSV yukarıdan aşağı)
+            float z = (gridCenter.y - coordinates.y) * _sizeOfTile; // Y koordinatı ters çevrildi
             return _centerPoint.position + new Vector3(x, 0, z);
         }
 
