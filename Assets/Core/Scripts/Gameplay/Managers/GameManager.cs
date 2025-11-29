@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Core.Scripts.Lib.Utility;
 using Cysharp.Threading.Tasks;
 using Lib.SceneLoad;
@@ -19,9 +20,16 @@ namespace Core.Scripts.Gameplay.Managers
 
         private void Start()
         {
-            _sceneController.LoadSceneAsync(GameplaySceneName).Forget();
+            LoadScenes().Forget();
+        }
+
+        private async UniTask LoadScenes()
+        { 
+            await _sceneController.LoadSceneAsync(GameplaySceneName);
+            await _sceneController.LoadSceneAsync(MainSceneName);
         }
 
         private const string GameplaySceneName = "GameScene";
+        private const string MainSceneName = "MainScene";
     }
 }

@@ -18,3 +18,5 @@ MonoBehaviour:
     SceneName: RootScene
   - SceneAsset: {fileID: 102900000, guid: 1fc1ef5d894d4431681e88313971ea43, type: 3}
     SceneName: GameScene
+  - SceneAsset: {fileID: 102900000, guid: 4ab5df2cf9d1c4a8986acc5d5f9963c1, type: 3}
+    SceneName: MainScene
