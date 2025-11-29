@@ -60,10 +60,4 @@ namespace Core.Scripts.Gameplay.Levels
             SetTileModelList(LevelData);
         }
     }
-
-    public class LevelTileModel
-    {
-        public TileType Type;
-        public Vector2Int Coordinates;
-    }
 }

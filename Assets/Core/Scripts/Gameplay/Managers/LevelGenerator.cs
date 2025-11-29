@@ -38,6 +38,7 @@ namespace Core.Scripts.Gameplay.Managers
         public IReadOnlyList<HoleItemView> HoleItems => _holeItems;
         public IReadOnlyList<MinionView> Minions => _minions;
 
+        public IReadOnlyDictionary<int, LevelTileModel> LocationModels { get; set; }
         [ProButton]
         public void TestGenerateLevel(int index)
         {

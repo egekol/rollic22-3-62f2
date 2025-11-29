@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Core.Scripts.Gameplay.Items
 {
-    public class TileView : MonoBehaviour, ILocation
+    public class TileView : MonoBehaviour, ITileItem, ILocation
     {
         private void SetEnabled(bool isEnabled)
         {
@@ -32,6 +32,12 @@ namespace Core.Scripts.Gameplay.Items
         {
             LevelTileModel = tileModel;
         }
+    }
+
+    public interface ITileItem
+    {
+        void ShowAnimation(float delay = 0f);
+        void HideAnimation(float delay = 0f);
     }
 
     public interface ILocation
