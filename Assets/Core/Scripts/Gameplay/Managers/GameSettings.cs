@@ -218,5 +218,27 @@ namespace Core.Scripts.Gameplay.Managers
             await _levelGenerator.PlayShowAnimations();
             OnLevelReadyToPlay();
         }
+        
+        public async UniTask RestartCompletedLevel()
+        {
+            _inputManager.SetInputState(InputState.Disabled);
+            await _inGameUI.HideAsync();
+            _backgroundUI.BlockViewWithCanvas();
+            _levelManager.LoadCurrentLevel();
+            _inGameUI.InitializeHeader(_levelManager.LevelModel); 
+            _levelGenerator.GenerateLevel(LevelManager.Instance.LevelModel);
+            _backgroundUI.PlayParticleFaster();
+            await UniTask.WaitForSeconds(1.4f);
+            _backgroundUI.PlayParticleSlower();
+            await UniTask.WaitForSeconds(.9f);
+            _levelGenerator.SetItemsVisible(true);
+            await UniTask.WaitForSeconds(.8f);
+            _levelGenerator.SetItemsVisible(false);
+
+            _backgroundUI.UnblockViewWithCanvas();
+            _inGameUI.ShowAnimation(); 
+            await _levelGenerator.PlayShowAnimations();
+            OnLevelReadyToPlay();
+        }
     }
 }

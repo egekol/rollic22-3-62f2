@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36dac6f1be204d3d8f0b9f1416b0068f, type: 3}
-  m_Name: LevelData_Three Main Level - Easy
+  m_Name: LevelData_Three Main Level - Easy (1)
   m_EditorClassIdentifier: 
   LevelName: Easy
   LevelIndex: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
     Coordinates: {x: 4, y: 2}
   - Type: 1
     Coordinates: {x: 5, y: 2}
-  - Type: 2
+  - Type: 0
     Coordinates: {x: 6, y: 2}
   - Type: 1
     Coordinates: {x: 7, y: 2}
@@ -123,7 +123,7 @@ MonoBehaviour:
     Coordinates: {x: 1, y: 6}
   - Type: 0
     Coordinates: {x: 2, y: 6}
-  - Type: 0
+  - Type: 1
     Coordinates: {x: 3, y: 6}
   - Type: 0
     Coordinates: {x: 4, y: 6}
@@ -139,7 +139,7 @@ MonoBehaviour:
     Coordinates: {x: 1, y: 7}
   - Type: 0
     Coordinates: {x: 2, y: 7}
-  - Type: 0
+  - Type: 1
     Coordinates: {x: 3, y: 7}
   - Type: 0
     Coordinates: {x: 4, y: 7}

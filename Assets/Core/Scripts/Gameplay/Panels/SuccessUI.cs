@@ -21,12 +21,18 @@ namespace Core.Scripts.Gameplay.Panels
         private void OnEnable()
         {
             nextLevelButton.onClick.AddListener(OnNextLevelClicked);
-            
+            _replyButton.onClick.AddListener(Reply);
         }
-        
+
+        private void Reply()
+        {
+            GameSettings.Instance.RestartCompletedLevel().Forget();
+        }
+
         private void OnDisable()
         {
             nextLevelButton.onClick.RemoveListener(OnNextLevelClicked);
+            _replyButton.onClick.RemoveListener(Reply);
         }
 
         private void OnNextLevelClicked()
@@ -52,6 +58,9 @@ namespace Core.Scripts.Gameplay.Panels
             _starOne.gameObject.SetActive(remainingMoves >= levelData.OneStarMinMoves);
             _starTwo.gameObject.SetActive(remainingMoves >= levelData.TwoStarMinMoves);
             _starThree.gameObject.SetActive(remainingMoves >= levelData.ThreeStarMinMoves);
+            
+            // Enerji (collectable) sayısını güncelle
+            _energyCountTMP.text = $"{LevelManager.Instance.CollectedCollectableCount}";
         }
     }
 }

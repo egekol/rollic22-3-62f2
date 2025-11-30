@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36dac6f1be204d3d8f0b9f1416b0068f, type: 3}
-  m_Name: LevelData_Level Design - Template
+  m_Name: Easy
   m_EditorClassIdentifier: 
-  LevelName: Level Design - Template
-  LevelIndex: 0
-  MoveCount: 5
+  LevelName: Three Main Level - Easy
+  LevelIndex: 3
+  MoveCount: 12
   OneStarMinMoves: 1
-  TwoStarMinMoves: 2
-  ThreeStarMinMoves: 3
+  TwoStarMinMoves: 7
+  ThreeStarMinMoves: 8
   Difficulty: 0
   GridSize: {x: 8, y: 12}
   Tiles:
@@ -39,7 +39,7 @@ MonoBehaviour:
     Coordinates: {x: 7, y: 0}
   - Type: 1
     Coordinates: {x: 0, y: 1}
-  - Type: 0
+  - Type: 1
     Coordinates: {x: 1, y: 1}
   - Type: 0
     Coordinates: {x: 2, y: 1}
@@ -63,9 +63,9 @@ MonoBehaviour:
     Coordinates: {x: 3, y: 2}
   - Type: 0
     Coordinates: {x: 4, y: 2}
-  - Type: 0
+  - Type: 1
     Coordinates: {x: 5, y: 2}
-  - Type: 2
+  - Type: 0
     Coordinates: {x: 6, y: 2}
   - Type: 1
     Coordinates: {x: 7, y: 2}
@@ -73,27 +73,27 @@ MonoBehaviour:
     Coordinates: {x: 0, y: 3}
   - Type: 0
     Coordinates: {x: 1, y: 3}
-  - Type: 0
-    Coordinates: {x: 2, y: 3}
   - Type: 1
+    Coordinates: {x: 2, y: 3}
+  - Type: 0
     Coordinates: {x: 3, y: 3}
-  - Type: 3
+  - Type: 0
     Coordinates: {x: 4, y: 3}
-  - Type: 0
+  - Type: 3
     Coordinates: {x: 5, y: 3}
-  - Type: 0
+  - Type: 3
     Coordinates: {x: 6, y: 3}
   - Type: 1
     Coordinates: {x: 7, y: 3}
   - Type: 1
     Coordinates: {x: 0, y: 4}
-  - Type: 0
+  - Type: 2
     Coordinates: {x: 1, y: 4}
   - Type: 0
     Coordinates: {x: 2, y: 4}
-  - Type: 1
+  - Type: 0
     Coordinates: {x: 3, y: 4}
-  - Type: 3
+  - Type: 0
     Coordinates: {x: 4, y: 4}
   - Type: 0
     Coordinates: {x: 5, y: 4}
@@ -103,13 +103,13 @@ MonoBehaviour:
     Coordinates: {x: 7, y: 4}
   - Type: 1
     Coordinates: {x: 0, y: 5}
-  - Type: 0
+  - Type: 2
     Coordinates: {x: 1, y: 5}
   - Type: 0
     Coordinates: {x: 2, y: 5}
-  - Type: 1
+  - Type: 0
     Coordinates: {x: 3, y: 5}
-  - Type: 3
+  - Type: 0
     Coordinates: {x: 4, y: 5}
   - Type: 0
     Coordinates: {x: 5, y: 5}
@@ -119,13 +119,13 @@ MonoBehaviour:
     Coordinates: {x: 7, y: 5}
   - Type: 1
     Coordinates: {x: 0, y: 6}
-  - Type: 0
+  - Type: 2
     Coordinates: {x: 1, y: 6}
   - Type: 0
     Coordinates: {x: 2, y: 6}
   - Type: 1
     Coordinates: {x: 3, y: 6}
-  - Type: 3
+  - Type: 0
     Coordinates: {x: 4, y: 6}
   - Type: 0
     Coordinates: {x: 5, y: 6}
@@ -135,11 +135,11 @@ MonoBehaviour:
     Coordinates: {x: 7, y: 6}
   - Type: 1
     Coordinates: {x: 0, y: 7}
-  - Type: 0
+  - Type: 2
     Coordinates: {x: 1, y: 7}
   - Type: 0
     Coordinates: {x: 2, y: 7}
-  - Type: 0
+  - Type: 1
     Coordinates: {x: 3, y: 7}
   - Type: 0
     Coordinates: {x: 4, y: 7}
@@ -161,7 +161,7 @@ MonoBehaviour:
     Coordinates: {x: 4, y: 8}
   - Type: 0
     Coordinates: {x: 5, y: 8}
-  - Type: 0
+  - Type: 1
     Coordinates: {x: 6, y: 8}
   - Type: 1
     Coordinates: {x: 7, y: 8}
@@ -169,15 +169,15 @@ MonoBehaviour:
     Coordinates: {x: 0, y: 9}
   - Type: 0
     Coordinates: {x: 1, y: 9}
-  - Type: 4
+  - Type: 0
     Coordinates: {x: 2, y: 9}
   - Type: 0
     Coordinates: {x: 3, y: 9}
-  - Type: 0
+  - Type: 1
     Coordinates: {x: 4, y: 9}
   - Type: 0
     Coordinates: {x: 5, y: 9}
-  - Type: 0
+  - Type: 1
     Coordinates: {x: 6, y: 9}
   - Type: 1
     Coordinates: {x: 7, y: 9}
@@ -185,15 +185,15 @@ MonoBehaviour:
     Coordinates: {x: 0, y: 10}
   - Type: 0
     Coordinates: {x: 1, y: 10}
-  - Type: 0
+  - Type: 4
     Coordinates: {x: 2, y: 10}
   - Type: 0
     Coordinates: {x: 3, y: 10}
   - Type: 0
     Coordinates: {x: 4, y: 10}
-  - Type: 1
+  - Type: 3
     Coordinates: {x: 5, y: 10}
-  - Type: 0
+  - Type: 1
     Coordinates: {x: 6, y: 10}
   - Type: 1
     Coordinates: {x: 7, y: 10}
