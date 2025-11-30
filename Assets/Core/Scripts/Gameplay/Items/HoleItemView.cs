@@ -99,6 +99,12 @@ namespace Core.Scripts.Gameplay.Items
             if (other.TryGetComponent<MinionView>(out var minion))
             {
                 HandleMinionEntered(minion);
+                return;
+            }
+
+            if (other.TryGetComponent<CollectableItemView>(out var collectable))
+            {
+                HandleCollectableEntered(collectable);
             }
         }
 
@@ -110,6 +116,11 @@ namespace Core.Scripts.Gameplay.Items
             // LevelManager üzerinden minion'u kaldır
             LevelManager.Instance.RemoveMinion(minion);
             _splashParticle.Play();
+        }
+
+        private void HandleCollectableEntered(CollectableItemView collectable)
+        {
+            LevelManager.Instance.CollectCollectable(collectable);
         }
 
         private void OnDestroy()

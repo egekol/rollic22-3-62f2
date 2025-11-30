@@ -1,3 +1,4 @@
+using Core.Scripts.Gameplay.Events;
 using Core.Scripts.Gameplay.Items;
 using Core.Scripts.Gameplay.Levels;
 using Core.Scripts.Lib.Utility;
@@ -12,6 +13,7 @@ namespace Core.Scripts.Gameplay.Managers
         public LevelModel LevelModel { get; private set; }
         public int CurrentLevel { get; set; }
         public bool IsLevelPlaying { get; set; }
+        public int CollectedCollectableCount { get; private set; }
 
         public void LoadLevel(int levelIndex)
         {
@@ -22,6 +24,7 @@ namespace Core.Scripts.Gameplay.Managers
                 return;
             }
             LevelModel.InitializeLevel(levelData);
+            ResetCollectableCount();
         }
 
         public void Initialize(ILevelProvider levelProvider)
@@ -51,6 +54,27 @@ namespace Core.Scripts.Gameplay.Managers
             // Bu sayede level complete kontrolü animasyon bitmeden önce doğru çalışıyor
             
             LogHelper.Log($"Minion removed: {minionId}");
+        }
+
+        private void ResetCollectableCount()
+        {
+            CollectedCollectableCount = 0;
+            GameEvents.InvokeCollectableCountChanged(CollectedCollectableCount);
+        }
+
+        public void CollectCollectable(CollectableItemView collectable)
+        {
+            if (collectable == null || collectable.LevelTileModel == null)
+                return;
+
+            int collectableId = collectable.LevelTileModel.Id;
+
+            LevelModel.RemoveTile(collectableId);
+            LevelGenerator.Instance.DestroyCollectable(collectableId);
+
+            CollectedCollectableCount++;
+            GameEvents.InvokeCollectableCountChanged(CollectedCollectableCount);
+            LogHelper.Log($"Collectable collected: {collectableId} (Total: {CollectedCollectableCount})");
         }
 
         private void CollectMinionCount()

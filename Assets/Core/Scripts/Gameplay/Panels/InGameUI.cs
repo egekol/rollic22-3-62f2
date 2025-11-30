@@ -27,18 +27,25 @@ namespace Core.Scripts.Gameplay.Panels
         {
             _retryButton.onClick.AddListener(OnRetryButtonClicked);
             GameEvents.OnMoveCountChanged += OnMoveCountChanged;
+            GameEvents.OnCollectableCountChanged += OnCollectableCountChanged;
         }
         
         private void OnDisable()
         {
             _retryButton.onClick.RemoveListener(OnRetryButtonClicked);
             GameEvents.OnMoveCountChanged -= OnMoveCountChanged;
+            GameEvents.OnCollectableCountChanged -= OnCollectableCountChanged;
         }
 
         private void OnMoveCountChanged(int remainingMoves)
         {
             _moveCountTMP.text = $"{remainingMoves}";
             PlayMoveCountPunchAnimation();
+        }
+
+        private void OnCollectableCountChanged(int collectedCount)
+        {
+            _energyCountTMP.text = $"{collectedCount}";
         }
 
         private void PlayMoveCountPunchAnimation()
@@ -85,7 +92,7 @@ namespace Core.Scripts.Gameplay.Panels
         {
             _levelInfoTMP.text = $"{levelModel.LevelName}";
             _moveCountTMP.text = $"{levelModel.RemainingMoveCount}";
-            _energyCountTMP.text = $"0";
+            _energyCountTMP.text = $"{LevelManager.Instance.CollectedCollectableCount}";
         }
 
         private void OnRetryButtonClicked()

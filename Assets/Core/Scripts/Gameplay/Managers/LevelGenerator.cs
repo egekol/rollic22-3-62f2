@@ -32,6 +32,7 @@ namespace Core.Scripts.Gameplay.Managers
         [SerializeField] private SpikeTileView _spikeTileView;
         [SerializeField] private HoleItemView _holeItemView;
         [SerializeField] private MinionView _minionView;
+        [SerializeField] private CollectableItemView _collectableItemView;
 
         [Header("Containers")]
         [SerializeField] private Transform _tilesContainer;
@@ -52,6 +53,7 @@ namespace Core.Scripts.Gameplay.Managers
         // Item Dictionaries (key: LevelTileModel.Id)
         private Dictionary<int, HoleItemView> _holeItems = new();
         private Dictionary<int, MinionView> _minions = new();
+        private Dictionary<int, CollectableItemView> _collectableItems = new();
 
         // All location items by ID
         private Dictionary<int, ITileItem> _allLocationItems = new();
@@ -62,6 +64,7 @@ namespace Core.Scripts.Gameplay.Managers
         public IReadOnlyDictionary<int, HoleItemView> HoleItems => _holeItems;
         public IReadOnlyDictionary<int, MinionView> Minions => _minions;
         public IReadOnlyDictionary<int, ITileItem> AllLocationItems => _allLocationItems;
+        public IReadOnlyDictionary<int, CollectableItemView> CollectableItems => _collectableItems;
 
         [ProButton]
         public void TestGenerateLevel(int index)
@@ -153,7 +156,7 @@ namespace Core.Scripts.Gameplay.Managers
                     SpawnSpikeTile(tileModel, position);
                     break;
                 case TileType.Collectable:
-                    // TODO: Collectable prefab eklendiğinde spawn edilecek
+                    SpawnCollectable(tileModel, position);
                     break;
             }
         }
@@ -198,6 +201,14 @@ namespace Core.Scripts.Gameplay.Managers
             _allLocationItems[tileModel.Id] = minion;
         }
 
+        private void SpawnCollectable(LevelTileModel tileModel, Vector3 position)
+        {
+            var collectable = Instantiate(_collectableItemView, position, Quaternion.identity, _itemsContainer);
+            collectable.SetTileModel(tileModel);
+            _collectableItems[tileModel.Id] = collectable;
+            _allLocationItems[tileModel.Id] = collectable;
+        }
+
         public ITileItem GetLocationById(int id)
         {
             return _allLocationItems.TryGetValue(id, out var location) ? location : null;
@@ -210,6 +221,7 @@ namespace Core.Scripts.Gameplay.Managers
             ClearDictionary(_spikeTiles);
             ClearDictionary(_holeItems);
             ClearDictionary(_minions);
+            ClearDictionary(_collectableItems);
             _allLocationItems.Clear();
         }
 
@@ -240,6 +252,19 @@ namespace Core.Scripts.Gameplay.Managers
                 if (minion != null)
                 {
                     minion.Kill();
+                }
+            }
+        }
+
+        public void DestroyCollectable(int collectableId)
+        {
+            if (_collectableItems.Remove(collectableId, out var collectable))
+            {
+                _allLocationItems.Remove(collectableId);
+                
+                if (collectable != null)
+                {
+                    collectable.Collect();
                 }
             }
         }
