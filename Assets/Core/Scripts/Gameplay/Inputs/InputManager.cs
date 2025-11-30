@@ -22,7 +22,6 @@ namespace Core.Scripts.Gameplay.Inputs
             }
 
             var sqrMagnitude = Vector2.SqrMagnitude(new Vector2(scrollPosition.x, scrollPosition.y));
-            LogHelper.Log($"Scroll Updated: {scrollPosition} - Magnitude: {sqrMagnitude} - Threshold: {_scrollThreshold}");
             if (sqrMagnitude < _scrollThreshold )
             {
                 return;

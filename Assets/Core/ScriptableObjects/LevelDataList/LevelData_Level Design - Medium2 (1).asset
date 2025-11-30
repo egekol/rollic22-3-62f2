@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36dac6f1be204d3d8f0b9f1416b0068f, type: 3}
   m_Name: LevelData_Level Design - Medium2 (1)
   m_EditorClassIdentifier: 
-  LevelName: Level Design - Medium2 (1)
+  LevelName: Test
   LevelIndex: 0
-  MoveCount: 0
+  MoveCount: 9
   Difficulty: 0
   GridSize: {x: 7, y: 9}
   Tiles:

@@ -11,6 +11,7 @@ namespace Core.Scripts.Gameplay.Managers
 
         public LevelModel LevelModel { get; private set; }
         public int CurrentLevel { get; set; }
+        public bool IsLevelPlaying { get; set; }
 
         public void LoadLevel(int levelIndex)
         {
@@ -46,6 +47,11 @@ namespace Core.Scripts.Gameplay.Managers
             LevelGenerator.Instance.DestroyMinion(minionId);
             
             LogHelper.Log($"Minion removed: {minionId}");
+        }
+
+        public void DecreaseMoveCount()
+        {
+            LevelModel.DecreaseMoveCount();
         }
     }
 }

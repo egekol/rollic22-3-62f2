@@ -92,6 +92,22 @@ namespace Core.Scripts.Gameplay.Managers
 
             await UniTask.WaitForSeconds(delay);
         }
+        public async UniTask PlayHideAnimations()
+        {
+            float delayPerDiagonal = 0.03f;
+
+            float delay = 0f;
+            foreach (var item in _allLocationItems.Values)
+            {
+                var coords = item.LevelTileModel.Coordinates;
+                // Diagonal distance from top-left corner (0,0)
+                int diagonalDistance = coords.x + coords.y;
+                delay = diagonalDistance * delayPerDiagonal;
+                item.HideAnimation(delay);
+            }
+
+            await UniTask.WaitForSeconds(delay);
+        }
 
         private Vector2 CalculateGridCenter(Vector2Int gridSize)
         {

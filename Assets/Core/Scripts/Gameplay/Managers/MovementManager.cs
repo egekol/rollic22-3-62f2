@@ -16,6 +16,7 @@ namespace Core.Scripts.Gameplay.Managers
         None,
         Swiping,
         Idle,
+        Stopped
     }
 
     public class MovementManager : Singleton<MovementManager>
@@ -28,7 +29,7 @@ namespace Core.Scripts.Gameplay.Managers
         private LevelModel _levelModel;
         private ILevelGenerator _levelGenerator;
 
-        public MovementState MovementState { get; set; } = MovementState.Idle;
+        public MovementState MovementState { get; private set; } = MovementState.Idle;
         
         public Ease Ease => _ease;
 
@@ -51,7 +52,7 @@ namespace Core.Scripts.Gameplay.Managers
             if (MovementState == MovementState.Swiping)
                 return;
 
-            MovementState = MovementState.Swiping;
+            SetMovementState(MovementState.Swiping);
 
             var moveTasks = new List<UniTask>();
             var directionVector = GetDirectionVector(direction);
@@ -94,8 +95,7 @@ namespace Core.Scripts.Gameplay.Managers
 
             // Tüm animasyonların bitmesini bekle
             await UniTask.WhenAll(moveTasks);
-            LogHelper.Log($"Movement Complete: {moveTasks.Count}");
-            MovementState = MovementState.Idle;
+            LogHelper.Log($"Movement Complete - Tasks Count: {moveTasks.Count}");
         }
 
         private Vector2Int GetDirectionVector(InputDirection direction)
@@ -234,5 +234,10 @@ namespace Core.Scripts.Gameplay.Managers
             return _centerPoint.position + new Vector3(x, 0, z);
         }
 
+        public void SetMovementState(MovementState state)
+        {
+            MovementState = state;
+            LogHelper.Log($"Movement State set to: {state}");
+        }
     }
 }

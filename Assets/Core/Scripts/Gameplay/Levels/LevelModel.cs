@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Lib.Debugger;
 using UnityEngine;
 
 namespace Core.Scripts.Gameplay.Levels
@@ -18,6 +19,7 @@ namespace Core.Scripts.Gameplay.Levels
         public int RemainingMoveCount { get; private set; }
         public int CollectedCoinCount { get; private set; }
         public int CollectedMinionCount { get; private set; }
+        public bool HasMinionDied { get; set; }
 
         // Dictionary to access tiles by their unique ID
         private Dictionary<int, LevelTileModel> _tilesById = new Dictionary<int, LevelTileModel>();
@@ -110,6 +112,12 @@ namespace Core.Scripts.Gameplay.Levels
             CollectedCoinCount = 0;
             CollectedMinionCount = 0;
             SetTileModelList(LevelData);
+        }
+
+        public void DecreaseMoveCount()
+        {
+            RemainingMoveCount = Mathf.Max(0, RemainingMoveCount - 1);
+            LogHelper.Log($"Remaining Moves: {RemainingMoveCount}");
         }
     }
 }

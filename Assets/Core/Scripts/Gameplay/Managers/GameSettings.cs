@@ -103,18 +103,87 @@ namespace Core.Scripts.Gameplay.Managers
             {
                 return;
             }
-            LogHelper.Log($"Input Direction: {inputDirection} - Move");
+            
+            LogHelper.Log($"ProcessInputMovement: Direction - {inputDirection}, State - {_movementManager.MovementState}");
+            
+            _levelManager.DecreaseMoveCount();
             await _movementManager.Move(inputDirection);
 
             if (!CheckIfAnyConditionMet())
             {
-                // _inputManager.SetInputState(InputState.Enabled);
+                _movementManager.SetMovementState(MovementState.Idle);
             }
         }
 
         private bool CheckIfAnyConditionMet()
         {
+            var levelModel = _levelManager.LevelModel;
+            
+            // Success: Tüm minionlar toplandı
+            if (levelModel.CollectedMinionCount >= levelModel.TotalMinionCount)
+            {
+                OnSuccess();
+                return true;
+            }
+            
+            // Fail: Minion kaldı ve (hamle bitti veya minion öldü)
+            if (levelModel.RemainingMoveCount <= 0 || levelModel.HasMinionDied)
+            {
+                OnFail();
+                return true;
+            }
+            
             return false;
+        }
+        
+        private void OnSuccess()
+        {
+            StopLevel();
+            LogHelper.Log("Success");
+            // TODO: SuccessUI göster
+        }
+        
+        private void OnFail()
+        {
+            StopLevel();
+            LogHelper.Log("Fail");
+            // TODO: FailUI göster
+        }
+
+        private void StopLevel()
+        {
+            LevelManager.Instance.IsLevelPlaying = false;
+            _movementManager.SetMovementState(MovementState.Stopped);
+            _inputManager.SetInputState(InputState.Disabled);
+        }
+
+        public void RetryButtonClicked()
+        {
+            if (!LevelManager.Instance.IsLevelPlaying)
+            {
+                return;
+            }
+
+            RestartLevel().Forget();
+            // PlayNextLevel().Forget();
+        }
+
+        private async UniTask RestartLevel()
+        {
+            _inputManager.SetInputState(InputState.Disabled);
+            _inGameUI.HideAnimation(); 
+            await _levelGenerator.PlayHideAnimations();
+            _backgroundUI.BlockViewWithCanvas();
+            _levelManager.LoadCurrentLevel();
+            _levelGenerator.GenerateLevel(LevelManager.Instance.LevelModel);
+            _levelGenerator.SetItemsVisible(true);
+            await UniTask.WaitForSeconds(.1f);
+            _levelGenerator.SetItemsVisible(false);
+
+            _backgroundUI.UnblockViewWithCanvas();
+            _inGameUI.ShowAnimation(); 
+            await _levelGenerator.PlayShowAnimations();
+            OnLevelReadyToPlay();
         }
     }
 }

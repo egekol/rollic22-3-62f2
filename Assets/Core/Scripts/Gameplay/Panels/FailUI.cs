@@ -1,0 +1,9 @@
+using UnityEngine;
+
+namespace Core.Scripts.Gameplay.Panels
+{
+    public class FailUI : MonoBehaviour
+    {
+        
+    }
+}
