@@ -340,7 +340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 203469738}
   _cameraPivotPoint: {fileID: 447055270}
-  _ratioValue: 7
+  _ratioValue: 12
 --- !u!1001 &1245038224
 PrefabInstance:
   m_ObjectHideFlags: 0

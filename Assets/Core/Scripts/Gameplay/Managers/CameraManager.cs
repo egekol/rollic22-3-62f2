@@ -13,7 +13,7 @@ namespace Core.Scripts.Gameplay.Managers
         private const float BaseGridWidth = 8;
         private Vector3 _initialCameraPosition;
         private bool _isInitialized;
-
+        
         private void Awake()
         {
             _initialCameraPosition = _camera.transform.position;
@@ -26,6 +26,16 @@ namespace Core.Scripts.Gameplay.Managers
             {
                 _initialCameraPosition = _camera.transform.position;
                 _isInitialized = true;
+            }
+            
+            if (LevelManager.Instance.CurrentLevel== 3)
+            { 
+                _camera.transform.localPosition = new Vector3(0, 47.7400017f, -7.13000011f);
+                return;
+            }
+            else
+            {
+                _camera.transform.position = _cameraPivotPoint.transform.position;
             }
             
             // var ratio =  Mathf.Max(gridWidth - BaseGridWidth,0);
