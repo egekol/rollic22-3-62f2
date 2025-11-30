@@ -12,7 +12,7 @@ namespace Core.Scripts.Gameplay.Items
         public LevelTileModel LevelTileModel { get; set; }
         public UniTaskCompletionSource MoveCompletionSource => _moveCompletionSource;
         
-        private void SetEnabled(bool isEnabled)
+        public void SetEnabled(bool isEnabled)
         {
             gameObject.SetActive(isEnabled);
         }
@@ -60,6 +60,7 @@ namespace Core.Scripts.Gameplay.Items
     {
         void ShowAnimation(float delay = 0f);
         void HideAnimation(float delay = 0f);
+        void SetEnabled(bool isEnabled);
         UniTaskCompletionSource Move(Vector3 targetPosition, int distance);
     }
 

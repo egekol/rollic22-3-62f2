@@ -269,7 +269,7 @@ MonoBehaviour:
   _emitterThickness: 0
   _loop: 1
   _prewarm: 0
-  _duration: 10
+  _duration: 5
   _playMode: 2
   _startSize:
     separable: 1
@@ -596,8 +596,8 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 1
-          value: 1
+          time: 0.3
+          value: 2.0023575
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -1563,7 +1563,7 @@ MonoBehaviour:
   moduleParticleFoldout: 1
   moduleMovementFoldout: 1
   moduleEventsFoldout: 1
-  moduleAdvancedFoldout: 0
+  moduleAdvancedFoldout: 1
   m_Sprite: {fileID: 21300000, guid: 6c5e308a9ce154461b43e9348f6e1f6b, type: 3}
   m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1 &8036711218292002846

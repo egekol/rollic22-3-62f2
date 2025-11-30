@@ -16,8 +16,8 @@ namespace Core.Scripts.Gameplay.Items
         {
             LevelTileModel = tileModel;
         }
-        
-        private void SetEnabled(bool isEnabled)
+
+        public void SetEnabled(bool isEnabled)
         {
             gameObject.SetActive(isEnabled);
         }

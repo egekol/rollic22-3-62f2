@@ -58,6 +58,7 @@ namespace Core.Scripts.Gameplay.Managers
         {
             LevelManager.Instance.LoadLevel(index);
             GenerateLevel(LevelManager.Instance.LevelModel);
+            PlayShowAnimations();
         }
         
         public void GenerateLevel(LevelModel levelModel)
@@ -72,10 +73,9 @@ namespace Core.Scripts.Gameplay.Managers
                 SpawnTile(tileModel, worldPosition);
             }
             
-            PlayShowAnimations();
         }
 
-        private void PlayShowAnimations()
+        public void PlayShowAnimations()
         {
             float delayPerDiagonal = 0.03f;
 
@@ -192,6 +192,14 @@ namespace Core.Scripts.Gameplay.Managers
                     Destroy(kvp.Value.gameObject);
             }
             dictionary.Clear();
+        }
+
+        public void SetItemsVisible(bool isEnabled)
+        {
+            foreach (var item in _allLocationItems.Values)
+            {
+                item.SetEnabled(isEnabled);
+            }
         }
     }
 }

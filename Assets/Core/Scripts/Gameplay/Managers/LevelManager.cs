@@ -27,5 +27,10 @@ namespace Core.Scripts.Gameplay.Managers
             _levelProvider = levelProvider;
             LevelModel = new LevelModel();
         }
+
+        public void LoadCurrentLevel()
+        {
+            LoadLevel(CurrentLevel);
+        }
     }
 }

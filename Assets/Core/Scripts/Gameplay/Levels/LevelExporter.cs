@@ -130,7 +130,12 @@ namespace Core.Scripts.Gameplay.Levels
             {
                 return _levelDataList[levelIndex];
             }
-            
+
+            levelIndex %= _levelDataList.Count;
+            if (levelIndex < _levelDataList.Count)
+            {
+                return _levelDataList[levelIndex];
+            }
             return null;
         }
     }

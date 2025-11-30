@@ -24,9 +24,9 @@ namespace Core.Scripts.Gameplay.Managers
         }
 
         private async UniTask LoadScenes()
-        { 
-            await _sceneController.LoadSceneAsync(GameplaySceneName);
+        {
             await _sceneController.LoadSceneAsync(MainSceneName);
+            await _sceneController.LoadSceneAsync(GameplaySceneName);
         }
 
         private const string GameplaySceneName = "GameScene";
