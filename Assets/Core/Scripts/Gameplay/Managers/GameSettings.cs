@@ -77,11 +77,11 @@ namespace Core.Scripts.Gameplay.Managers
         private void OnLevelReadyToPlay()
         {
             _inputManager.SetInputState(InputState.Enabled);
+            _levelManager.IsLevelPlaying = true;
         }
 
         public void OnInputUpdated(InputState inputState, InputDirection inputDirection)
         {
-            LogHelper.Log($"Input State: {inputState} - Direction: {inputDirection}");
             if (inputState != InputState.Scrolling)
             {
                 return;
@@ -106,7 +106,6 @@ namespace Core.Scripts.Gameplay.Managers
             
             LogHelper.Log($"ProcessInputMovement: Direction - {inputDirection}, State - {_movementManager.MovementState}");
             
-            _levelManager.DecreaseMoveCount();
             await _movementManager.Move(inputDirection);
 
             if (!CheckIfAnyConditionMet())
@@ -165,19 +164,18 @@ namespace Core.Scripts.Gameplay.Managers
             }
 
             RestartLevel().Forget();
-            // PlayNextLevel().Forget();
         }
 
         private async UniTask RestartLevel()
         {
             _inputManager.SetInputState(InputState.Disabled);
-            _inGameUI.HideAnimation(); 
+            await _inGameUI.HideAsync(); 
             await _levelGenerator.PlayHideAnimations();
             _backgroundUI.BlockViewWithCanvas();
             _levelManager.LoadCurrentLevel();
             _levelGenerator.GenerateLevel(LevelManager.Instance.LevelModel);
             _levelGenerator.SetItemsVisible(true);
-            await UniTask.WaitForSeconds(.1f);
+            await UniTask.WaitForSeconds(.8f);
             _levelGenerator.SetItemsVisible(false);
 
             _backgroundUI.UnblockViewWithCanvas();

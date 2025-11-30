@@ -38,7 +38,7 @@ namespace Core.Scripts.Gameplay.Items
         {
             transform.localScale = Vector3.zero;
             SetEnabled(true);
-            transform.DOScale(Vector3.one, .3f).SetEase(Ease.OutBack).SetDelay(delay);
+            transform.DOScale(Vector3.one, .3f).SetEase(Ease.OutBack).SetDelay(delay).SetLink(gameObject);
         }
 
         public void HideAnimation(float delay = 0)
@@ -47,7 +47,7 @@ namespace Core.Scripts.Gameplay.Items
                 .OnComplete(() =>
             {
                 SetEnabled(false);
-            });
+            }).SetLink(gameObject);
         }
 
         public UniTaskCompletionSource Move(Vector3 targetPosition, int distance)
@@ -65,9 +65,15 @@ namespace Core.Scripts.Gameplay.Items
             
             transform.DOMove(targetPosition, duration)
                 .SetEase(MovementManager.Instance.Ease)
-                .OnComplete(() => _moveCompletionSource.TrySetResult());
+                .OnComplete(() => SetResultWithDelay().Forget());
             
             return _moveCompletionSource;
+        }
+
+        private async UniTask SetResultWithDelay()
+        {
+            await UniTask.WaitForSeconds(.1f);
+            _moveCompletionSource.TrySetResult();
         }
 
         private void PlayMovementAnimation(InputDirection direction, float duration)

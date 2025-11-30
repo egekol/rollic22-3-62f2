@@ -1,4 +1,5 @@
 using System;
+using Core.Scripts.Gameplay.Events;
 using Core.Scripts.Gameplay.Levels;
 using Core.Scripts.Gameplay.Managers;
 using Core.Scripts.Lib.Utility;
@@ -25,11 +26,27 @@ namespace Core.Scripts.Gameplay.Panels
         private void OnEnable()
         {
             _retryButton.onClick.AddListener(OnRetryButtonClicked);
+            GameEvents.OnMoveCountChanged += OnMoveCountChanged;
         }
         
         private void OnDisable()
         {
             _retryButton.onClick.RemoveListener(OnRetryButtonClicked);
+            GameEvents.OnMoveCountChanged -= OnMoveCountChanged;
+        }
+
+        private void OnMoveCountChanged(int remainingMoves)
+        {
+            _moveCountTMP.text = $"{remainingMoves}";
+            PlayMoveCountPunchAnimation();
+        }
+
+        private void PlayMoveCountPunchAnimation()
+        {
+            DOTween.Kill(_moveCountTMP.transform);
+            _moveCountTMP.transform.localScale = Vector3.one;
+            _moveCountTMP.transform.DOPunchScale(Vector3.one * 0.3f, 0.3f, 5, 0.5f)
+                .SetId(_moveCountTMP.transform).SetLink(gameObject);
         }
 
         public void ShowAnimation()
@@ -42,16 +59,18 @@ namespace Core.Scripts.Gameplay.Panels
             HideAsync().Forget();
         }
 
-        private async UniTask ShowAsync()
+        public async UniTask ShowAsync()
         {
+            DOTween.Kill(transform);
             _canvasGroup.alpha = 0;
             _canvasGroup.gameObject.SetActive(true);
-            await _canvasGroup.DOFade(1, 0.5f);
+            await _canvasGroup.DOFade(1, 0.5f).SetId(transform);
         }
 
-        private async UniTask HideAsync()
+        public async UniTask HideAsync()
         {
-            await _canvasGroup.DOFade(0, 0.5f);
+            DOTween.Kill(transform);
+            await _canvasGroup.DOFade(0, 0.5f).SetId(transform);
             _canvasGroup.gameObject.SetActive(false);
         }
 
@@ -59,7 +78,6 @@ namespace Core.Scripts.Gameplay.Panels
         {
             _canvasGroup.gameObject.SetActive(isEnabled);
         }
-
 
         public void InitializeHeader(LevelModel levelModel)
         {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Core.Scripts.Gameplay.Events;
 using Core.Scripts.Gameplay.Inputs;
 using Core.Scripts.Gameplay.Items;
 using Core.Scripts.Gameplay.Levels;
@@ -91,6 +92,12 @@ namespace Core.Scripts.Gameplay.Managers
                     var completionSource = hole.Move(targetWorldPos, distance);
                     moveTasks.Add(completionSource.Task);
                 }
+            }
+
+            if (moveTasks.Count>0)
+            {
+                LevelManager.Instance.DecreaseMoveCount();
+                GameEvents.InvokeMoveCountChanged(LevelManager.Instance.LevelModel.RemainingMoveCount);
             }
 
             // Tüm animasyonların bitmesini bekle

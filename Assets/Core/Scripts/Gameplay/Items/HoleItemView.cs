@@ -29,7 +29,7 @@ namespace Core.Scripts.Gameplay.Items
         {
             transform.localScale = Vector3.zero;
             SetEnabled(true);
-            transform.DOScale(Vector3.one, .3f).SetEase(Ease.OutBack).SetDelay(delay);
+            transform.DOScale(Vector3.one, .3f).SetEase(Ease.OutBack).SetDelay(delay).SetLink(gameObject);
         }
 
         public void HideAnimation(float delay = 0)
@@ -38,7 +38,7 @@ namespace Core.Scripts.Gameplay.Items
                 .OnComplete(() =>
                 {
                     SetEnabled(false);
-                });
+                }).SetLink(gameObject);
         }
 
         public UniTaskCompletionSource Move(Vector3 targetPosition, int distance)
