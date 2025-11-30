@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aff322bdf044b868d0dd3fc5b5a8845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 5485033387101629853}
 --- !u!1001 &2122415212393467916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -170,7 +171,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: efdfb149fd384da4a8a45488ac958d75,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: efdfb149fd384da4a8a45488ac958d75,
         type: 3}
@@ -180,7 +181,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: efdfb149fd384da4a8a45488ac958d75,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: efdfb149fd384da4a8a45488ac958d75,
         type: 3}
@@ -195,7 +196,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: efdfb149fd384da4a8a45488ac958d75,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: efdfb149fd384da4a8a45488ac958d75,
         type: 3}
@@ -222,6 +223,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: SKM_Minion
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: efdfb149fd384da4a8a45488ac958d75,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7cdcecd0653c9134dac0d9248c80bad3, type: 2}
+    - target: {fileID: 5866666021909216657, guid: efdfb149fd384da4a8a45488ac958d75,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -230,6 +241,12 @@ PrefabInstance:
 --- !u!4 &1945251683305289703 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: efdfb149fd384da4a8a45488ac958d75,
+    type: 3}
+  m_PrefabInstance: {fileID: 2122415212393467916}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5485033387101629853 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: efdfb149fd384da4a8a45488ac958d75,
     type: 3}
   m_PrefabInstance: {fileID: 2122415212393467916}
   m_PrefabAsset: {fileID: 0}

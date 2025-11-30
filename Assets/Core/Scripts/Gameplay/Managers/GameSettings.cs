@@ -53,6 +53,7 @@ namespace Core.Scripts.Gameplay.Managers
 
         private async UniTask PlayNextLevel()
         {
+            _inGameUI.SetEnabled(false);
             _backgroundUI.BlockViewWithCanvas();
             _backgroundUI.PlayParticleFaster();
             await UniTask.WaitForSeconds(1.4f);
@@ -60,7 +61,6 @@ namespace Core.Scripts.Gameplay.Managers
             await UniTask.WaitForSeconds(.9f);
 
             _levelManager.LoadCurrentLevel();
-            _inGameUI.SetEnabled(false);
             _inGameUI.InitializeHeader(_levelManager.LevelModel);
             _inputManager.SetInputState(InputState.Disabled);
             _levelGenerator.GenerateLevel(LevelManager.Instance.LevelModel);

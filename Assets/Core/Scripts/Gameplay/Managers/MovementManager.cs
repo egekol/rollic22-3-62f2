@@ -72,7 +72,7 @@ namespace Core.Scripts.Gameplay.Managers
                 {
                     var targetWorldPos = CalculateWorldPosition(targetCoord);
                     minion.LevelTileModel.Coordinates = targetCoord;
-                    var completionSource = minion.Move(targetWorldPos, distance);
+                    var completionSource = minion.Move(targetWorldPos, distance, direction);
                     moveTasks.Add(completionSource.Task);
                 }
             }

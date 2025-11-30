@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36dac6f1be204d3d8f0b9f1416b0068f, type: 3}
+  m_Name: LevelData_Level Design - Medium2 (1)
+  m_EditorClassIdentifier: 
+  LevelName: Level Design - Medium2 (1)
+  LevelIndex: 0
+  MoveCount: 0
+  Difficulty: 0
+  GridSize: {x: 7, y: 9}
+  Tiles:
+  - Type: 1
+    Coordinates: {x: 0, y: 0}
+  - Type: 1
+    Coordinates: {x: 1, y: 0}
+  - Type: 1
+    Coordinates: {x: 5, y: 0}
+  - Type: 1
+    Coordinates: {x: 6, y: 0}
+  - Type: 1
+    Coordinates: {x: 0, y: 1}
+  - Type: 0
+    Coordinates: {x: 1, y: 1}
+  - Type: 1
+    Coordinates: {x: 2, y: 1}
+  - Type: 1
+    Coordinates: {x: 4, y: 1}
+  - Type: 0
+    Coordinates: {x: 5, y: 1}
+  - Type: 1
+    Coordinates: {x: 6, y: 1}
+  - Type: 1
+    Coordinates: {x: 0, y: 2}
+  - Type: 0
+    Coordinates: {x: 1, y: 2}
+  - Type: 0
+    Coordinates: {x: 2, y: 2}
+  - Type: 1
+    Coordinates: {x: 3, y: 2}
+  - Type: 0
+    Coordinates: {x: 4, y: 2}
+  - Type: 0
+    Coordinates: {x: 5, y: 2}
+  - Type: 1
+    Coordinates: {x: 6, y: 2}
+  - Type: 1
+    Coordinates: {x: 0, y: 3}
+  - Type: 0
+    Coordinates: {x: 1, y: 3}
+  - Type: 0
+    Coordinates: {x: 2, y: 3}
+  - Type: 0
+    Coordinates: {x: 3, y: 3}
+  - Type: 0
+    Coordinates: {x: 4, y: 3}
+  - Type: 2
+    Coordinates: {x: 5, y: 3}
+  - Type: 1
+    Coordinates: {x: 6, y: 3}
+  - Type: 1
+    Coordinates: {x: 0, y: 4}
+  - Type: 0
+    Coordinates: {x: 1, y: 4}
+  - Type: 0
+    Coordinates: {x: 2, y: 4}
+  - Type: 0
+    Coordinates: {x: 3, y: 4}
+  - Type: 0
+    Coordinates: {x: 4, y: 4}
+  - Type: 0
+    Coordinates: {x: 5, y: 4}
+  - Type: 1
+    Coordinates: {x: 6, y: 4}
+  - Type: 1
+    Coordinates: {x: 0, y: 5}
+  - Type: 0
+    Coordinates: {x: 1, y: 5}
+  - Type: 0
+    Coordinates: {x: 2, y: 5}
+  - Type: 1
+    Coordinates: {x: 3, y: 5}
+  - Type: 0
+    Coordinates: {x: 4, y: 5}
+  - Type: 0
+    Coordinates: {x: 5, y: 5}
+  - Type: 1
+    Coordinates: {x: 6, y: 5}
+  - Type: 1
+    Coordinates: {x: 1, y: 6}
+  - Type: 4
+    Coordinates: {x: 2, y: 6}
+  - Type: 0
+    Coordinates: {x: 3, y: 6}
+  - Type: 0
+    Coordinates: {x: 4, y: 6}
+  - Type: 1
+    Coordinates: {x: 5, y: 6}
+  - Type: 1
+    Coordinates: {x: 2, y: 7}
+  - Type: 2
+    Coordinates: {x: 3, y: 7}
+  - Type: 1
+    Coordinates: {x: 4, y: 7}
+  - Type: 1
+    Coordinates: {x: 3, y: 8}
