@@ -200,17 +200,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 539b3f48d66bb4558ae6dbdff1574495,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 539b3f48d66bb4558ae6dbdff1574495,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 539b3f48d66bb4558ae6dbdff1574495,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.2
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 539b3f48d66bb4558ae6dbdff1574495,
         type: 3}
@@ -225,48 +225,73 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 539b3f48d66bb4558ae6dbdff1574495,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.179
+      value: 0.88
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 539b3f48d66bb4558ae6dbdff1574495,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.98583853
+      value: 0.5805024
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 539b3f48d66bb4558ae6dbdff1574495,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.16769749
+      value: -0.43835673
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 539b3f48d66bb4558ae6dbdff1574495,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.55633837
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 539b3f48d66bb4558ae6dbdff1574495,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.40168148
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 539b3f48d66bb4558ae6dbdff1574495,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -19.308
+      value: -3.554
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 539b3f48d66bb4558ae6dbdff1574495,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90.192
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 539b3f48d66bb4558ae6dbdff1574495,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -72.929
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 539b3f48d66bb4558ae6dbdff1574495,
         type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 539b3f48d66bb4558ae6dbdff1574495,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 539b3f48d66bb4558ae6dbdff1574495,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c52edd78543a14746bf01b465b4f0403, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 539b3f48d66bb4558ae6dbdff1574495,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 218b93a042561ee49b464fa3ef4d6822, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 539b3f48d66bb4558ae6dbdff1574495,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: c7de8a36c85d81c41adf46cdc5b3685b, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 539b3f48d66bb4558ae6dbdff1574495,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5beb0ab24bafe994eb0add3c08b3dca2, type: 2}
     - target: {fileID: 919132149155446097, guid: 539b3f48d66bb4558ae6dbdff1574495,
         type: 3}
       propertyPath: m_Name
