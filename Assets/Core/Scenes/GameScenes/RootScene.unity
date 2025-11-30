@@ -360,6 +360,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelDataList:
+  - {fileID: 11400000, guid: 51efb07b45ddb45318b8a4ca20450036, type: 2}
+  - {fileID: 11400000, guid: 07f48c76e1d6e41c9afa60b02783a4c9, type: 2}
   - {fileID: 11400000, guid: 613be8048161a4fa8bd75a0406fabaf7, type: 2}
 --- !u!114 &1490242665
 MonoBehaviour:
