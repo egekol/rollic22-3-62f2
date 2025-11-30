@@ -244,6 +244,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _centerPoint: {fileID: 802226965}
   _sizeOfTile: 2
+  _movementDuration: 0.02
+  _ease: 1
 --- !u!1 &1139220422
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,9 +736,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9664bd611dd74e8090123bee85047942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
   _scrollSensitivity: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

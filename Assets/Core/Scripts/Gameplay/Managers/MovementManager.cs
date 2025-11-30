@@ -4,6 +4,7 @@ using Core.Scripts.Gameplay.Items;
 using Core.Scripts.Gameplay.Levels;
 using Core.Scripts.Lib.Utility;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Lib.CustomAttributes.Scripts;
 using Lib.Debugger;
 using UnityEngine;
@@ -21,11 +22,17 @@ namespace Core.Scripts.Gameplay.Managers
     {
         [SerializeField] private Transform _centerPoint;
         [SerializeField] private float _sizeOfTile = 1f;
+        [SerializeField] private float _movementDuration = 0.05f;
+        [SerializeField] private Ease _ease = Ease.InSine;
 
         private LevelModel _levelModel;
         private ILevelGenerator _levelGenerator;
 
         public MovementState MovementState { get; set; } = MovementState.Idle;
+        
+        public Ease Ease => _ease;
+
+        public float MovementDuration => _movementDuration;
 
         public void Initialize(LevelModel levelModel, ILevelGenerator levelGenerator)
         {

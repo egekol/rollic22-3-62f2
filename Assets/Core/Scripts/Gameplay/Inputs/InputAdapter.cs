@@ -22,6 +22,7 @@ namespace Core.Scripts.Gameplay.Inputs
         private void OnEnable()
         {
             OnScrollUpdate += OnScrollUpdated;
+            OnScrollStart += OnScrollStarted;
         }
 
         private void OnDisable()
@@ -33,7 +34,7 @@ namespace Core.Scripts.Gameplay.Inputs
         {
             HandleInput();
         }
-        
+
         private void HandleInput()
         {
             bool inputPressed = Input.GetMouseButton(0);
@@ -60,16 +61,21 @@ namespace Core.Scripts.Gameplay.Inputs
                 _lastInputPosition = currentInputPosition;
             }
         }
-        
-        
+
+
         public void SetScrollSensitivity(float sensitivity)
         {
             _scrollSensitivity = sensitivity;
         }
-        
+
         public void OnScrollUpdated(float2 scrollPosition)
         {
             InputManager.Instance.OnScrollUpdated(scrollPosition);
+        }
+
+        private void OnScrollStarted(float2 startPos)
+        {
+            InputManager.Instance.OnScrollStarted(startPos);
         }
     }
 }

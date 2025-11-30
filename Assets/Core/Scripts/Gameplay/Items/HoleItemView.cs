@@ -1,4 +1,5 @@
 using Core.Scripts.Gameplay.Levels;
+using Core.Scripts.Gameplay.Managers;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -42,9 +43,9 @@ namespace Core.Scripts.Gameplay.Items
         {
             _moveCompletionSource = new UniTaskCompletionSource();
             
-            float duration = distance * 0.1f; // Her birim için 0.1 saniye
+            float duration = distance * MovementManager.Instance.MovementDuration; // Her birim için 0.1 saniye
             transform.DOMove(targetPosition, duration)
-                .SetEase(Ease.Linear)
+                .SetEase(MovementManager.Instance.Ease)
                 .OnComplete(() => _moveCompletionSource.TrySetResult());
             
             return _moveCompletionSource;

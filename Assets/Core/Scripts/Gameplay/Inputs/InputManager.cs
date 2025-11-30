@@ -44,6 +44,11 @@ namespace Core.Scripts.Gameplay.Inputs
                 InputDirection = InputDirection.None;
             }
         }
+
+        public void OnScrollStarted(float2 startPos)
+        {
+            
+        }
     }
     
     
