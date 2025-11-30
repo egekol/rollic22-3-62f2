@@ -65,7 +65,11 @@ namespace Core.Scripts.Gameplay.Items
             
             transform.DOMove(targetPosition, duration)
                 .SetEase(MovementManager.Instance.Ease)
-                .OnComplete(() => SetResultWithDelay().Forget());
+                .OnComplete(() =>
+                {
+                    SetResultWithDelay().Forget();
+                    PlayIdleAfterDelay(0).Forget();
+                });
             
             return _moveCompletionSource;
         }
@@ -88,8 +92,6 @@ namespace Core.Scripts.Gameplay.Items
             };
             
             _animatorPlayer.PlayAnimationByType(animationType, false);
-            
-            PlayIdleAfterDelay(duration).Forget();
         }
 
         private async UniTaskVoid PlayIdleAfterDelay(float delay)

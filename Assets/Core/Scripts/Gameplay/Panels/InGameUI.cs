@@ -63,6 +63,8 @@ namespace Core.Scripts.Gameplay.Panels
         {
             DOTween.Kill(transform);
             _canvasGroup.alpha = 0;
+            _successUI.gameObject.SetActive(false);
+            _failUI.gameObject.SetActive(false);
             _canvasGroup.gameObject.SetActive(true);
             await _canvasGroup.DOFade(1, 0.5f).SetId(transform);
         }
@@ -89,6 +91,16 @@ namespace Core.Scripts.Gameplay.Panels
         private void OnRetryButtonClicked()
         {
             GameSettings.Instance.RetryButtonClicked();
+        }
+
+        public void ShowFailUI()
+        {
+            _failUI.Show();
+        }
+
+        public void ShowSuccessUI()
+        {
+            _successUI.Show();
         }
     }
 }

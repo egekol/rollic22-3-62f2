@@ -119,5 +119,11 @@ namespace Core.Scripts.Gameplay.Levels
             RemainingMoveCount = Mathf.Max(0, RemainingMoveCount - 1);
             LogHelper.Log($"Remaining Moves: {RemainingMoveCount}");
         }
+
+        public void CollectMinion()
+        {
+            CollectedMinionCount++;
+            LogHelper.Log($"Collected Minions: {CollectedMinionCount}/{TotalMinionCount}");
+        }
     }
 }

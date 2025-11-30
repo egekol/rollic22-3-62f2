@@ -48,10 +48,10 @@ namespace Core.Scripts.Gameplay.Managers
 
         private void OnGameSceneInitialized()
         {
-            PlayNextLevel().Forget();
+            StartLevel().Forget();
         }
 
-        private async UniTask PlayNextLevel()
+        private async UniTask StartLevel()
         {
             _inGameUI.SetEnabled(false);
             _backgroundUI.BlockViewWithCanvas();
@@ -138,6 +138,7 @@ namespace Core.Scripts.Gameplay.Managers
         private void OnSuccess()
         {
             StopLevel();
+            InGameUI.Instance.ShowSuccessUI();
             LogHelper.Log("Success");
             // TODO: SuccessUI göster
         }
@@ -145,6 +146,7 @@ namespace Core.Scripts.Gameplay.Managers
         private void OnFail()
         {
             StopLevel();
+            InGameUI.Instance.ShowFailUI();
             LogHelper.Log("Fail");
             // TODO: FailUI göster
         }
@@ -166,7 +168,7 @@ namespace Core.Scripts.Gameplay.Managers
             RestartLevel().Forget();
         }
 
-        private async UniTask RestartLevel()
+        public async UniTask RestartLevel()
         {
             _inputManager.SetInputState(InputState.Disabled);
             await _inGameUI.HideAsync(); 
@@ -174,6 +176,30 @@ namespace Core.Scripts.Gameplay.Managers
             _backgroundUI.BlockViewWithCanvas();
             _levelManager.LoadCurrentLevel();
             _levelGenerator.GenerateLevel(LevelManager.Instance.LevelModel);
+            _levelGenerator.SetItemsVisible(true);
+            await UniTask.WaitForSeconds(.8f);
+            _levelGenerator.SetItemsVisible(false);
+
+            _backgroundUI.UnblockViewWithCanvas();
+            _inGameUI.ShowAnimation(); 
+            await _levelGenerator.PlayShowAnimations();
+            OnLevelReadyToPlay();
+        }
+
+        public async UniTask LoadNextLevel()
+        {
+            _inputManager.SetInputState(InputState.Disabled);
+            _levelGenerator.PlayHideAnimations().Forget();
+            await _inGameUI.HideAsync();
+            _backgroundUI.BlockViewWithCanvas();
+            _levelManager.IncreaseLevel();
+            _levelManager.LoadCurrentLevel();
+            _inGameUI.InitializeHeader(_levelManager.LevelModel); 
+            _levelGenerator.GenerateLevel(LevelManager.Instance.LevelModel);
+            _backgroundUI.PlayParticleFaster();
+            await UniTask.WaitForSeconds(1.4f);
+            _backgroundUI.PlayParticleSlower();
+            await UniTask.WaitForSeconds(.9f);
             _levelGenerator.SetItemsVisible(true);
             await UniTask.WaitForSeconds(.8f);
             _levelGenerator.SetItemsVisible(false);

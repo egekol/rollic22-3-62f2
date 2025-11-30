@@ -34,6 +34,8 @@ namespace Core.Scripts.Gameplay.Managers
         {
             LoadLevel(CurrentLevel);
         }
+        
+        
 
         public void RemoveMinion(MinionView minion)
         {
@@ -45,13 +47,24 @@ namespace Core.Scripts.Gameplay.Managers
             LevelModel.RemoveTile(minionId);
             
             LevelGenerator.Instance.DestroyMinion(minionId);
+            CollectMinionCount();
             
             LogHelper.Log($"Minion removed: {minionId}");
+        }
+
+        private void CollectMinionCount()
+        {
+            LevelModel.CollectMinion();
         }
 
         public void DecreaseMoveCount()
         {
             LevelModel.DecreaseMoveCount();
+        }
+
+        public void IncreaseLevel()
+        {
+            CurrentLevel++;
         }
     }
 }
