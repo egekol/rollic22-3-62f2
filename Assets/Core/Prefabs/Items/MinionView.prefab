@@ -131,7 +131,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 5485033387101629853}
-  _splashParticle: {fileID: 0}
 --- !u!136 &6739878252307286124
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -191,7 +190,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: efdfb149fd384da4a8a45488ac958d75,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: efdfb149fd384da4a8a45488ac958d75,
         type: 3}

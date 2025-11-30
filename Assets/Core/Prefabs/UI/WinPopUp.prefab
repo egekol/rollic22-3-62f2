@@ -946,6 +946,9 @@ MonoBehaviour:
   nextLevelButton: {fileID: 8726289372196848432}
   _energyCountTMP: {fileID: 3209937198671841878}
   _canvasGroup: {fileID: 1571099690650475953}
+  _starOne: {fileID: 3862293830479382361}
+  _starTwo: {fileID: 8322075936362385780}
+  _starThree: {fileID: 5126471358880519312}
 --- !u!225 &1571099690650475953
 CanvasGroup:
   m_ObjectHideFlags: 0

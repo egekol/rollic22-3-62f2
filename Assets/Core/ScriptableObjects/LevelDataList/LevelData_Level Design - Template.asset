@@ -15,6 +15,9 @@ MonoBehaviour:
   LevelName: Level Design - Template
   LevelIndex: 0
   MoveCount: 5
+  OneStarMinMoves: 1
+  TwoStarMinMoves: 2
+  ThreeStarMinMoves: 3
   Difficulty: 0
   GridSize: {x: 8, y: 12}
   Tiles:
