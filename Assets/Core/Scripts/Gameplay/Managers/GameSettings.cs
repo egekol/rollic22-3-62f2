@@ -81,6 +81,7 @@ namespace Core.Scripts.Gameplay.Managers
 
         public void OnInputUpdated(InputState inputState, InputDirection inputDirection)
         {
+            LogHelper.Log($"Input State: {inputState} - Direction: {inputDirection}");
             if (inputState != InputState.Scrolling)
             {
                 return;

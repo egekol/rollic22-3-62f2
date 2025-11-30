@@ -23,11 +23,13 @@ namespace Core.Scripts.Gameplay.Inputs
         {
             OnScrollUpdate += OnScrollUpdated;
             OnScrollStart += OnScrollStarted;
+            OnScrollEnd += OnScrollEnded;
         }
 
         private void OnDisable()
         {
             OnScrollUpdate -= OnScrollUpdated;
+            OnScrollStart -= OnScrollStarted;
         }
 
         private void Update()
@@ -66,6 +68,11 @@ namespace Core.Scripts.Gameplay.Inputs
         public void SetScrollSensitivity(float sensitivity)
         {
             _scrollSensitivity = sensitivity;
+        }
+
+        private void OnScrollEnded()
+        {
+            InputManager.Instance.OnScrollEnded();
         }
 
         public void OnScrollUpdated(float2 scrollPosition)
