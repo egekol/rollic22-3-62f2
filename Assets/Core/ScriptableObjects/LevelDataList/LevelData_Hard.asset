@@ -169,7 +169,7 @@ MonoBehaviour:
     Coordinates: {x: 7, y: 5}
   - Type: 0
     Coordinates: {x: 8, y: 5}
-  - Type: 0
+  - Type: 1
     Coordinates: {x: 9, y: 5}
   - Type: 1
     Coordinates: {x: 10, y: 5}

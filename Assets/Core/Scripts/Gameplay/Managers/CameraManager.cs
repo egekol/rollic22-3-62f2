@@ -28,7 +28,8 @@ namespace Core.Scripts.Gameplay.Managers
                 _isInitialized = true;
             }
             
-            if (LevelManager.Instance.CurrentLevel== 3)
+            LogHelper.Log($"level : {LevelManager.Instance.CurrentLevel}");
+            if (LevelManager.Instance.CurrentLevel== 1)
             { 
                 _camera.transform.localPosition = new Vector3(0, 47.7400017f, -7.13000011f);
                 return;

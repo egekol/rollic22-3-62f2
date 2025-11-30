@@ -201,6 +201,7 @@ namespace Core.Scripts.Gameplay.Managers
             // _levelGenerator.PlayHideAnimations().Forget();
             await _inGameUI.HideAsync();
             _backgroundUI.BlockViewWithCanvas();
+            _cameraManager.AdjustCameraForGridWidth(_levelManager.LevelModel.GridSize.x);
             _levelManager.IncreaseLevel();
             _levelManager.LoadCurrentLevel();
             _inGameUI.InitializeHeader(_levelManager.LevelModel); 
