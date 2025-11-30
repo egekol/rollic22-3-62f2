@@ -67,17 +67,44 @@ namespace Core.Scripts.Gameplay.Managers
             {
                 finalHolePositions.Add(kvp.Value.targetCoord);
             }
+            
+            // Hole'ların geçtiği TÜM yolları hesapla (başlangıçtan hedefe kadar)
+            var holePathPositions = new HashSet<Vector2Int>();
+            foreach (var kvp in holeTargets)
+            {
+                var holeId = kvp.Key;
+                var (targetCoord, distance) = kvp.Value;
+                
+                if (_levelGenerator.HoleItems.TryGetValue(holeId, out var hole))
+                {
+                    var startPos = hole.LevelTileModel.Coordinates;
+                    var currentPos = startPos;
+                    
+                    // Başlangıç pozisyonunu ekle (arkadan gelen minion buraya ulaşabilir)
+                    holePathPositions.Add(startPos);
+                    
+                    // Hole'un geçtiği her pozisyonu ekle
+                    for (int i = 0; i < distance; i++)
+                    {
+                        currentPos += directionVector;
+                        holePathPositions.Add(currentPos);
+                    }
+                    
+                    // Final pozisyonu da ekle (distance = 0 durumu için güvenlik)
+                    holePathPositions.Add(targetCoord);
+                }
+            }
 
             // Minion'ların hedef pozisyonlarını hesapla
             var minionTargets = CalculateMinionTargets(directionVector);
             
             // Hole'a düşecek minion sayısını hesapla ve önceden collect et
-            // Not: Minion hareket etmese bile (distance = 0), hole onun üzerine gelebilir
+            // Minion'un final pozisyonu hole'un YOLUNDAKİ herhangi bir noktada ise, yakalanacak
             int minionsToFallInHole = 0;
             foreach (var kvp in minionTargets)
             {
                 var (targetCoord, _) = kvp.Value;
-                if (finalHolePositions.Contains(targetCoord))
+                if (holePathPositions.Contains(targetCoord))
                 {
                     minionsToFallInHole++;
                 }
@@ -113,7 +140,7 @@ namespace Core.Scripts.Gameplay.Managers
                 {
                     var targetWorldPos = CalculateWorldPosition(targetCoord);
                     hole.LevelTileModel.Coordinates = targetCoord;
-                    var completionSource = hole.Move(targetWorldPos, distance);
+                    var completionSource = hole.Move(targetWorldPos, distance, direction);
                     moveTasks.Add(completionSource.Task);
                 }
             }
@@ -149,9 +176,20 @@ namespace Core.Scripts.Gameplay.Managers
             // Önce hole'ların hareket sonrası pozisyonlarını hesapla
             var holeTargets = CalculateHoleTargets(directionVector);
             var finalHolePositions = new HashSet<Vector2Int>();
+            
+            // Hole'ların orijinal pozisyonlarını da tut (final pozisyon -> orijinal pozisyon)
+            var holeOriginalPositions = new Dictionary<Vector2Int, Vector2Int>();
             foreach (var kvp in holeTargets)
             {
-                finalHolePositions.Add(kvp.Value.targetCoord);
+                var holeId = kvp.Key;
+                var finalPos = kvp.Value.targetCoord;
+                finalHolePositions.Add(finalPos);
+                
+                // Orijinal pozisyonu bul
+                if (_levelGenerator.HoleItems.TryGetValue(holeId, out var hole))
+                {
+                    holeOriginalPositions[finalPos] = hole.LevelTileModel.Coordinates;
+                }
             }
             
             // Hareket yönüne göre minion'ları sırala (önce en uzaktakiler hareket etsin)
@@ -198,10 +236,21 @@ namespace Core.Scripts.Gameplay.Managers
                     if (tileAtNext != null && (tileAtNext.Type == TileType.Wall || tileAtNext.Type == TileType.Ice))
                         break;
 
-                    // Diğer minion kontrolü (minion'lar birbirinin içinden geçemez)
-                    // Ancak hedef pozisyon hole ise, minion düşeceği için bloklanmaz
-                    if (occupiedByMinions.Contains(nextCoord) && !finalHolePositions.Contains(nextCoord))
-                        break;
+                    // Diğer minion kontrolü
+                    if (occupiedByMinions.Contains(nextCoord))
+                    {
+                        // Hole önümüzde ise (hareket yönünde) stack'e izin ver
+                        // Hole arkadan geliyorsa stack yapma
+                        bool canPassThrough = false;
+                        if (finalHolePositions.Contains(nextCoord) && 
+                            holeOriginalPositions.TryGetValue(nextCoord, out var holeOriginalPos))
+                        {
+                            canPassThrough = IsPositionInFront(currentCoord, holeOriginalPos, directionVector);
+                        }
+                        
+                        if (!canPassThrough)
+                            break;
+                    }
 
                     // Spike ve Collectable içinden geçebilir
                     targetCoord = nextCoord;
@@ -210,15 +259,38 @@ namespace Core.Scripts.Gameplay.Managers
 
                 targets[id] = (targetCoord, distance);
                 
-                // Sadece hole pozisyonu değilse occupied olarak işaretle
-                // Hole pozisyonunda minion düşeceği için diğer minion'lar da oraya gidebilmeli
-                if (!finalHolePositions.Contains(targetCoord))
+                // Hole pozisyonunda stacking kontrolü:
+                // Sadece hole önümüzdeyse (orijinal pozisyon hareket yönünde) stack'e izin ver
+                bool shouldAllowStacking = false;
+                if (finalHolePositions.Contains(targetCoord) && 
+                    holeOriginalPositions.TryGetValue(targetCoord, out var originalPos))
+                {
+                    shouldAllowStacking = IsPositionInFront(currentCoord, originalPos, directionVector);
+                }
+                
+                if (!shouldAllowStacking)
                 {
                     occupiedByMinions.Add(targetCoord);
                 }
             }
 
             return targets;
+        }
+        
+        /// <summary>
+        /// Verilen pozisyonun, referans noktasına göre hareket yönünde (önde) olup olmadığını kontrol eder.
+        /// </summary>
+        private bool IsPositionInFront(Vector2Int referencePos, Vector2Int checkPos, Vector2Int direction)
+        {
+            if (direction.x != 0)
+            {
+                return direction.x > 0 ? checkPos.x > referencePos.x : checkPos.x < referencePos.x;
+            }
+            if (direction.y != 0)
+            {
+                return direction.y > 0 ? checkPos.y > referencePos.y : checkPos.y < referencePos.y;
+            }
+            return false;
         }
 
         private Dictionary<int, (Vector2Int targetCoord, int distance)> CalculateHoleTargets(Vector2Int directionVector)
