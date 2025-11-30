@@ -8,7 +8,6 @@ namespace Core.Scripts.Gameplay.Inputs
     public class InputAdapter : MonoBehaviour
     {
         [Header("Scroll Settings")]
-        [SerializeField] private LayerMask _layerMask = -1;
         [SerializeField] private float _scrollSensitivity = 1f;
         private Camera _raycastCamera;
         

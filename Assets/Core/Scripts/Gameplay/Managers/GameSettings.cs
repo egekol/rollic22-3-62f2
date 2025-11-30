@@ -1,7 +1,10 @@
+using System.Threading.Tasks;
+using Core.Scripts.Gameplay.Inputs;
 using Core.Scripts.Gameplay.Levels;
 using Core.Scripts.Gameplay.Panels;
 using Core.Scripts.Lib.Utility;
 using Cysharp.Threading.Tasks;
+using Lib.Debugger;
 
 namespace Core.Scripts.Gameplay.Managers
 {
@@ -11,7 +14,9 @@ namespace Core.Scripts.Gameplay.Managers
         private LevelExporter _levelProvider;
         private MovementManager _movementManager;
         private BackgroundUI _backgroundUI;
+        private InGameUI _inGameUI;
         private LevelGenerator _levelGenerator;
+        private InputManager _inputManager;
 
         private void Awake()
         {
@@ -36,28 +41,79 @@ namespace Core.Scripts.Gameplay.Managers
             _levelGenerator = LevelGenerator.Instance;
             _movementManager.Initialize(LevelManager.Instance.LevelModel, _levelGenerator);
             _backgroundUI = BackgroundUI.Instance;
+            _inputManager = InputManager.Instance;
+            _inGameUI = InGameUI.Instance;
             OnGameSceneInitialized();
         }
 
         private void OnGameSceneInitialized()
         {
-            StartNextLevel().Forget();
+            PlayNextLevel().Forget();
         }
 
-        private async UniTask StartNextLevel()
+        private async UniTask PlayNextLevel()
         {
             _backgroundUI.BlockViewWithCanvas();
             _backgroundUI.PlayParticleFaster();
-            await UniTask.WaitForSeconds(1.8f);
+            await UniTask.WaitForSeconds(1.4f);
             _backgroundUI.PlayParticleSlower();
-            await UniTask.WaitForSeconds(.5f);
+            await UniTask.WaitForSeconds(.9f);
+
             _levelManager.LoadCurrentLevel();
+            _inGameUI.SetEnabled(false);
+            _inGameUI.InitializeHeader(_levelManager.LevelModel);
+            _inputManager.SetInputState(InputState.Disabled);
             _levelGenerator.GenerateLevel(LevelManager.Instance.LevelModel);
             _levelGenerator.SetItemsVisible(true);
             await UniTask.WaitForSeconds(.1f);
             _levelGenerator.SetItemsVisible(false);
+
             _backgroundUI.UnblockViewWithCanvas();
-            _levelGenerator.PlayShowAnimations();
+            _inGameUI.ShowAnimation(); 
+            await _levelGenerator.PlayShowAnimations();
+            OnLevelReadyToPlay();
+        }
+
+        private void OnLevelReadyToPlay()
+        {
+            _inputManager.SetInputState(InputState.Enabled);
+        }
+
+        public void OnInputUpdated(InputState inputState, InputDirection inputDirection)
+        {
+            if (inputState != InputState.Scrolling)
+            {
+                return;
+            }
+
+            if (inputDirection == InputDirection.None)
+            {
+                return;
+            }
+            
+            ProcessInputMovement(inputDirection).Forget();
+            
+        }
+
+        private async UniTask ProcessInputMovement(InputDirection inputDirection)
+        {
+            
+            if (_movementManager.MovementState == MovementState.Swiping)
+            {
+                return;
+            }
+            LogHelper.Log($"Input Direction: {inputDirection} - Move");
+            await _movementManager.Move(inputDirection);
+
+            if (!CheckIfAnyConditionMet())
+            {
+                // _inputManager.SetInputState(InputState.Enabled);
+            }
+        }
+
+        private bool CheckIfAnyConditionMet()
+        {
+            return false;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using Core.Scripts.Gameplay.Managers;
 using Core.Scripts.Lib.Utility;
 using Lib.Debugger;
 using Unity.Mathematics;
@@ -8,14 +9,13 @@ namespace Core.Scripts.Gameplay.Inputs
     public class InputManager : Singleton<InputManager>
     {
 
-        public InputState InputState { get; private set; } = InputState.Scrolling;
+        public InputState InputState { get; private set; }
         public InputDirection InputDirection { get; set; }
         
         public void OnScrollUpdated(float2 scrollPosition)
         {
-            if (InputState == InputState.Disabled)
+            if (InputState is InputState.Disabled)
             {
-                InputDirection = InputDirection.None;
                 return;
             }
             
@@ -32,7 +32,17 @@ namespace Core.Scripts.Gameplay.Inputs
             {
                 InputDirection = InputDirection.None;
             }
-            LogHelper.Log($"Input Direction: {InputDirection} - Scroll Position: {scrollPosition}");
+
+            GameSettings.Instance.OnInputUpdated(InputState, InputDirection);
+        }
+        
+        public void SetInputState(InputState state)
+        {
+            InputState = state;
+            if (state == InputState.Disabled)
+            {
+                InputDirection = InputDirection.None;
+            }
         }
     }
     
@@ -49,7 +59,8 @@ namespace Core.Scripts.Gameplay.Inputs
     public enum InputState
     {
         None,
-        Scrolling,
         Disabled,
+        Enabled,
+        Scrolling,
     }
 }

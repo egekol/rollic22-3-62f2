@@ -5,6 +5,7 @@ using Core.Scripts.Gameplay.Levels;
 using Core.Scripts.Lib.Utility;
 using Cysharp.Threading.Tasks;
 using Lib.CustomAttributes.Scripts;
+using Lib.Debugger;
 using UnityEngine;
 
 namespace Core.Scripts.Gameplay.Managers
@@ -35,12 +36,12 @@ namespace Core.Scripts.Gameplay.Managers
         [ProButton]
         public void MoveTest(InputDirection direction)
         {
-            Move(direction);
+            Move(direction).Forget();
         }
         
-        public async void Move(InputDirection direction)
+        public async UniTask Move(InputDirection direction)
         {
-            if (MovementState != MovementState.Idle || direction == InputDirection.None)
+            if (MovementState == MovementState.Swiping)
                 return;
 
             MovementState = MovementState.Swiping;
@@ -86,7 +87,7 @@ namespace Core.Scripts.Gameplay.Managers
 
             // Tüm animasyonların bitmesini bekle
             await UniTask.WhenAll(moveTasks);
-            
+            LogHelper.Log($"Movement Complete: {moveTasks.Count}");
             MovementState = MovementState.Idle;
         }
 

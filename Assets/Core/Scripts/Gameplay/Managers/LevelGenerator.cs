@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Core.Scripts.Gameplay.Items;
 using Core.Scripts.Gameplay.Levels;
 using Core.Scripts.Lib.Utility;
+using Cysharp.Threading.Tasks;
 using Lib.CustomAttributes.Scripts;
 using UnityEngine;
 
@@ -58,7 +59,7 @@ namespace Core.Scripts.Gameplay.Managers
         {
             LevelManager.Instance.LoadLevel(index);
             GenerateLevel(LevelManager.Instance.LevelModel);
-            PlayShowAnimations();
+            PlayShowAnimations().Forget();
         }
         
         public void GenerateLevel(LevelModel levelModel)
@@ -75,18 +76,21 @@ namespace Core.Scripts.Gameplay.Managers
             
         }
 
-        public void PlayShowAnimations()
+        public async UniTask PlayShowAnimations()
         {
             float delayPerDiagonal = 0.03f;
 
+            float delay = 0f;
             foreach (var item in _allLocationItems.Values)
             {
                 var coords = item.LevelTileModel.Coordinates;
                 // Diagonal distance from top-left corner (0,0)
                 int diagonalDistance = coords.x + coords.y;
-                float delay = diagonalDistance * delayPerDiagonal;
+                delay = diagonalDistance * delayPerDiagonal;
                 item.ShowAnimation(delay);
             }
+
+            await UniTask.WaitForSeconds(delay);
         }
 
         private Vector2 CalculateGridCenter(Vector2Int gridSize)
