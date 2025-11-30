@@ -87,6 +87,23 @@ namespace Core.Scripts.Gameplay.Levels
             return _tilesById.TryGetValue(id, out var tile) ? tile : null;
         }
 
+        public void RemoveTile(int id)
+        {
+            if (_tilesById.TryGetValue(id, out var tile))
+            {
+                _tilesById.Remove(id);
+                
+                // TilesGrid'den de kaldır (eğer bu tile grid'de ise)
+                var coords = tile.Coordinates;
+                if (coords.x >= 0 && coords.x < GridSize.x && 
+                    coords.y >= 0 && coords.y < GridSize.y &&
+                    TilesGrid[coords.x, coords.y] == tile)
+                {
+                    TilesGrid[coords.x, coords.y] = null;
+                }
+            }
+        }
+
         public void ReloadLevel()
         {
             RemainingMoveCount = TotalMoveCount;

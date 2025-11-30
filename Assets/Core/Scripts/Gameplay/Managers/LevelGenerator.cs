@@ -205,5 +205,18 @@ namespace Core.Scripts.Gameplay.Managers
                 item.SetEnabled(isEnabled);
             }
         }
+
+        public void DestroyMinion(int minionId)
+        {
+            if (_minions.Remove(minionId, out var minion))
+            {
+                _allLocationItems.Remove(minionId);
+                
+                if (minion != null)
+                {
+                    minion.Kill();
+                }
+            }
+        }
     }
 }

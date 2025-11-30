@@ -1,3 +1,4 @@
+using Core.Scripts.Gameplay.Items;
 using Core.Scripts.Gameplay.Levels;
 using Core.Scripts.Lib.Utility;
 using Lib.Debugger;
@@ -31,6 +32,20 @@ namespace Core.Scripts.Gameplay.Managers
         public void LoadCurrentLevel()
         {
             LoadLevel(CurrentLevel);
+        }
+
+        public void RemoveMinion(MinionView minion)
+        {
+            if (minion == null || minion.LevelTileModel == null)
+                return;
+
+            int minionId = minion.LevelTileModel.Id;
+            
+            LevelModel.RemoveTile(minionId);
+            
+            LevelGenerator.Instance.DestroyMinion(minionId);
+            
+            LogHelper.Log($"Minion removed: {minionId}");
         }
     }
 }

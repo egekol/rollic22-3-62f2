@@ -8,6 +8,8 @@ namespace Core.Scripts.Gameplay.Items
 {
     public class HoleItemView : MonoBehaviour, ITileItem
     {
+        [SerializeField] private ParticleSystem _splashParticle;
+        
         private UniTaskCompletionSource _moveCompletionSource;
         
         public LevelTileModel LevelTileModel { get; set; }
@@ -43,12 +45,30 @@ namespace Core.Scripts.Gameplay.Items
         {
             _moveCompletionSource = new UniTaskCompletionSource();
             
-            float duration = distance * MovementManager.Instance.MovementDuration; // Her birim için 0.1 saniye
+            float duration = distance * MovementManager.Instance.MovementDuration;
             transform.DOMove(targetPosition, duration)
                 .SetEase(MovementManager.Instance.Ease)
                 .OnComplete(() => _moveCompletionSource.TrySetResult());
             
             return _moveCompletionSource;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent<MinionView>(out var minion))
+            {
+                HandleMinionEntered(minion);
+            }
+        }
+
+        private void HandleMinionEntered(MinionView minion)
+        {
+            // Minion'un hareket completion source'unu hemen tamamla (diğer hareketleri engellememesi için)
+            minion.MoveCompletionSource?.TrySetResult();
+            
+            // LevelManager üzerinden minion'u kaldır
+            LevelManager.Instance.RemoveMinion(minion);
+            _splashParticle.Play();
         }
 
         private void OnDestroy()

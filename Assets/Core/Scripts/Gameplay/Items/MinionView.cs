@@ -43,7 +43,7 @@ namespace Core.Scripts.Gameplay.Items
 
         public void HideAnimation(float delay = 0)
         {
-            transform.DOScale(Vector3.zero, .2f).SetEase(Ease.InBack).SetDelay(delay)
+            transform.DOScale(Vector3.zero, .1f).SetEase(Ease.InBack).SetDelay(delay)
                 .OnComplete(() =>
             {
                 SetEnabled(false);
@@ -101,6 +101,12 @@ namespace Core.Scripts.Gameplay.Items
         {
             // Item yok edildiğinde completion source'u tamamla
             _moveCompletionSource?.TrySetResult();
+        }
+
+        public void Kill()
+        {
+            HideAnimation();
+            Destroy(gameObject, 1f);
         }
     }
 }
